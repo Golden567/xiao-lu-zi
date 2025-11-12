@@ -1,0 +1,72 @@
+/* 基础重置与主题 */
+:root {
+  --bg: #ffe4ef; /* 粉色基调背景 */
+  --text: #c85b8f; /* 降低亮度与饱和度的主题粉色 */
+  --muted: #b37a98; /* 更柔和的次级文字颜色 */
+  --accent: #ff66aa;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: "Comic Neue", "Comic Sans MS", "Chalkboard SE", system-ui, -apple-system, Segoe UI, "Microsoft YaHei", sans-serif;
+  font-weight: 700; /* 整体文字更粗，更卡通 */
+  font-size: 13px; /* 全局文字更小，更轻盈 */
+  color: var(--text);
+  background-color: var(--bg);
+  background-image: url('background.jpg'); /* 将你的照片命名为 background.jpg 放在根目录 */
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+/* 柔和粉色叠加，保证烟花与文字可视性 */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    rgba(255, 182, 193, 0.10),
+    rgba(255, 192, 203, 0.18)
+  );
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* 布局与层级 */
+.site-footer { position: relative; z-index: 2; }
+.site-main { min-height: 100vh; }
+.site-footer {
+  padding: 16px;
+  text-align: center;
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 12px; /* 页脚文字进一步缩小 */
+}
+
+/* 画布覆盖全屏，放在最底层，不拦截点击 */
+#fireworks {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1; /* 盖在背景与柔光层之上 */
+  pointer-events: none;
+}
+
+/* 响应式断点，覆盖从 320px 到 1920px */
+@media (min-width: 768px) {
+  .site-footer { padding: 20px 24px; }
+}
+
+/* 无动画偏好时，减少视觉负担 */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
